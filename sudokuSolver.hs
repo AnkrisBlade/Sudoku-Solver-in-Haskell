@@ -126,7 +126,12 @@ solve sudoku = cargaGrid (cargaCell sudoku) >>= solve'
             | isGridSolved g = Just g
             | otherwise =
                 let xs = siguienteGrid' (minchoice g) g
-                in L.foldr ((<|>) . solve) Nothing xs
+                in L.foldr accum Nothing xs
+                    where
+                        accum sudoku Nothing = solve sudoku
+                        accum sudoku (Just o) = Just o                    
+                    -- L.foldr ((<|>) . solve) Nothing xs --> prueba todas las ramas
+
 
 
 --Funciones para la ilustración del sudoku original como del grid final
