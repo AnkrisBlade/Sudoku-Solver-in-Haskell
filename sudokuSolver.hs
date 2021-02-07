@@ -128,8 +128,8 @@ solve sudoku = cargaGrid (cargaCell sudoku) >>= solve'
                 let xs = siguienteGrid' (minchoice g) g
                 in L.foldr accum Nothing xs
                     where
-                        accum sudoku Nothing = solve sudoku
-                        accum sudoku (Just o) = Just o                    
+                        accum s Nothing = solve s
+                        accum s (Just o) = Just o                    
                     -- L.foldr ((<|>) . solve) Nothing xs --> prueba todas las ramas
 
 
@@ -162,7 +162,7 @@ gridCell css = do
     linea
 
 
--- Aletorizar el proceso de elección de posibilidades
+-- Aleatorizar el proceso de elección de posibilidades
 
 -- newrandom: genera un nuevo número a partir de una semilla y en un rango
 -- limitado por el valor l. Siendo l la longitud de la lista de opciones.
@@ -193,8 +193,8 @@ solve'' sudoku r = cargaGrid (cargaCell sudoku) >>= solve'
                 in 
                     L.foldr accum Nothing xs
                         where
-                            accum sudoku Nothing = solve'' sudoku (snd (randomchoice g r))
-                            accum sudoku (Just o) = Just o
+                            accum s Nothing = solve'' s (snd (randomchoice g r))
+                            accum s (Just o) = Just o
 
 -- Con aletoriedad
 main2 :: IO ()
