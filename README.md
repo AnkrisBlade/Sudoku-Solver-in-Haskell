@@ -1,6 +1,6 @@
 # Sudoku-Solver-in-Haskell
 
-<p>Cargar el módulo con el comando<\p>
+<p>Cargar el módulo con el comando en el terminal</p>
 
 ```
 ghci
