@@ -111,7 +111,10 @@ solve sudoku = cargaGrid (cargaCell sudoku) >>= solve'
             | isGridSolved g = Just g
             | otherwise =
                 let xs = siguienteGrid' (minchoice g) g
-                in L.foldr ((<|>) . solve) Nothing xs
+                in L.foldr accum Nothing xs
+                    where
+                        accum s Nothing = solve s
+                        accum s (Just o) = Just o   
 
 showGrid :: Grid -> [[Int]]
 showGrid g = S.chunksOf 9 [x | Fixed x <- A.elems g]
